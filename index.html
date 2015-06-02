@@ -22,8 +22,8 @@
 	    	    <a class="navbar-brand" href="javascript:void(0)">Masumi Maei</a>
 	    	</div>
 	    	<div class="navbar-collapse collapse navbar-responsive-collapse">
-	    	    <ul class="nav navbar-nav">
-	    	        <li ><a href="javascript:void(0)" Active</a></li>
+	    	    <ul class="nav navbar-nav" data-bind="foreach: pages">
+	    	        <li ><a href="javascript:void(0)" data-bind="text: $data, click: $parent.setPage"> Active</a></li>
 	    	    </ul>
 	    	    <form class="navbar-form navbar-right">
     	        	<input type="text" class="form-control" placeholder="Search">
@@ -32,16 +32,17 @@
 	    </div>
 	</div>
 
-	<div class="container">
+	<div class="container" data-bind="visible: currentPage() === 'about'">
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
-				About Masumi Maei
+				<h2>About Masumi Maei</h2>
+				<div data-bind="html: info"></div>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" data-bind="visible: currentPage() === 'resource'">
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
@@ -50,10 +51,10 @@
 			<div class="col-sm-2"></div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" data-bind="visible: currentPage() === 'studentPage'">
 		<div class="row" >
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
 				<form >
 					<div class="row panel panel-basic">
 						<div class="panel-body">
@@ -66,12 +67,14 @@
 								<p>Recordings to past classes</p>
 								<iframe data-bind="attr: {src: link}" width="100%" height="300"></iframe>
 							</div>
-							<div data-bind="text:repertoire.song1"></div>
+							<div data-bind="foreach: repertoire">
+								<div data-bind="text:songName"></div>
+							</div>
 						</div>
 					</div>
 				</form>
 			</div>
-			<div class="col-sm-4"></div>
+			<div class="col-sm-2"></div>
 		</div>
 	</div>
 
