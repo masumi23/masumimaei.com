@@ -2,6 +2,8 @@
 
 	var myFirebaseRef;
 	var viewModelMap;
+	//must be a better way to do this
+	var viewModelFire;
 
 	function init () {
 		console.log('init');
@@ -11,6 +13,7 @@
 		fbStudents = myFirebaseRef.child('students');
 		fbMe = myFirebaseRef.child('me');
 		fbResource = myFirebaseRef.child('resouce');
+		fbTest = myFirebaseRef.child('test')
 		
 		// myFirebaseRef.set({
 		// 	"001": {	
@@ -91,8 +94,21 @@
 			},
 			
 		});
+
+		//nothing's broken...yet...
+		viewModelFire = {
+			"items": KnockoutFire.observable(
+				myFirebaseRef, {
+					"$item": {
+						"content": true
+					}
+				}
+			),
+		};
 		
+		//I think I'm not supposed to do this
 		ko.applyBindings( viewModelMap );
+		ko.applyBindings( viewModelFire, document.getElementById("items") );
 
 	}
 
