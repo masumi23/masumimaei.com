@@ -24,7 +24,9 @@
 					"name": true,
 					"link": true,
 					"repertoire": {
-						"$song": true
+						"$song": {
+							"name": true
+						}
 					}
 				}
 			}
@@ -36,7 +38,7 @@
 		vm.currentStudent = ko.observable({
 			name: ko.observable("foo"),
 			link: ko.observable("www.google.com"),
-			repertoire: ko.observable([])
+			repertoire: ko.observable([1,2])
 		}) ,
 		vm.currentPage = ko.observable('studentPage'),
 		vm.currentMode = ko.observable('student'),
@@ -55,13 +57,19 @@
 		vm.addStudent = function() {
 			fbStudents.push({
 				name: "imaNewbee",
-				link: "www.google.com"
+				link: "www.google.com",
+				repertoire: ['a', 'b']
 			});
+			//how do I console.log this to see the list of rep?
 		};
 
 		vm.removeStudent = function (item) {
-			fbStudents.child(item.firebase.name()).remove();
+			fbStudents.child(item.firebase.key()).remove();
 		};	
+
+		vm.addSong = function() {
+			//how do I get to the firebase of a current student to add songs to them?
+		}
 	}
 
 	init();
