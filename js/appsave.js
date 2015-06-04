@@ -65,11 +65,13 @@
 
 		vm.removeStudent = function (item) {
 			fbStudents.child(item.firebase.key()).remove();
+			console.log(item);
 		};	
 
-		vm.addSong = function() {
-			//how do I get to the firebase of a current student to add songs to them?
-		}
+		vm.addSong = function(item) {
+			vm.currentStudent().firebase.child('repertoire').push({name:"song"});
+			console.log(item);
+		};
 	}
 
 	init();
