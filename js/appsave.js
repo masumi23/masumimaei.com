@@ -21,7 +21,11 @@
 			fbStudents, {
 				//$ means that vm.students is now an observable array
 				"$student": {
-					"name": true
+					"name": true,
+					"link": true,
+					"repertoire": {
+						"$song": true
+					}
 				}
 			}
 		);
@@ -30,7 +34,9 @@
 		vm.pages = ["about", "resource", "studentPage"],
 		vm.modes = ["admin", "student"],
 		vm.currentStudent = ko.observable({
-			name: ko.observable("foo")
+			name: ko.observable("foo"),
+			link: ko.observable("www.google.com"),
+			repertoire: ko.observable([])
 		}) ,
 		vm.currentPage = ko.observable('studentPage'),
 		vm.currentMode = ko.observable('student'),
@@ -48,7 +54,8 @@
 
 		vm.addStudent = function() {
 			fbStudents.push({
-				name: "imaNewbee"
+				name: "imaNewbee",
+				link: "www.google.com"
 			});
 		};
 

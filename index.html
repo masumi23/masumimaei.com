@@ -13,8 +13,15 @@
 	
 	<div>
 		<ul data-bind="foreach: students">
-			<li data-bind="text: name, click: $root.selectStudent"></li>
-			<a data-bind="click: $root.removeStudent">X</a>
+			<li><a data-bind="text: name, click: $root.selectStudent"></a></li>
+			<ul>
+				<li data-bind="text: link"></li>
+				<li>Repertoire:</li>
+					<ul data-bind="foreach: repertoire">
+						<li data-bind="text: $data"></li>
+					</ul>
+				<li><a data-bind="click: $root.removeStudent">X</a></li>
+			</ul>
 		</ul>
 	</div>
 
@@ -23,9 +30,19 @@
 	</div>
 
 	<div data-bind="with: currentStudent()">
-		<div data-bind="text: name"></div>
-		<label for="student-name">Name:</label>
-		<input id="student-name" type="text" data-bind="value: name">
+		
+		<div>
+			<div data-bind="text: name"></div>
+			<label for="student-name">Name:</label>
+			<input id="student-name" type="text" data-bind="value: name">
+		</div>
+		
+		<div>
+			<div data-bind="text: link"></div>
+			<label for="student-link">link:</label>
+			<input id="student-link" type="text" data-bind="value: link">
+		</div>
+
 	</div>
 
 
