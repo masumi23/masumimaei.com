@@ -13,13 +13,14 @@
 	
 	<div>
 		<ul data-bind="foreach: students">
-			<li data-bind="text: $data"></li>
+			<li data-bind="text: name, click: $root.selectStudent"></li>
 		</ul>
 	</div>
 
-	<div data-bind="with: currentStudent">
-		<label for="name">name:</label>
-		<input id="name" type="text" data-bind"value: name">
+	<div data-bind="with: currentStudent()">
+		<div data-bind="text: name"></div>
+		<label for="student-name">Name:</label>
+		<input id="student-name" type="text" data-bind="value: name">
 	</div>
 
 
@@ -29,6 +30,6 @@
 	<script src="lib/knockout.mapping-2.4.1.js"></script>
 	<script type="text/javascript" src="//hiroshi.github.io/knockoutFire/knockoutfire-0.0.5.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="js/app.js"></script>
+	<script src="js/appsave.js"></script>
 </body>
 </html>
