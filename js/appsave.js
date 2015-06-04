@@ -70,6 +70,11 @@
 
 		vm.addSong = function(item) {
 			vm.currentStudent().firebase.child('repertoire').push({name:"song"});
+		};
+
+		vm.removeSong = function(item) {
+			vm.currentStudent().firebase.child('repertoire').child(item.firebase.key()).remove();
+			console.log("removed song");
 			console.log(item);
 		};
 	}
