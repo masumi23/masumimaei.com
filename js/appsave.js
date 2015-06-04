@@ -50,6 +50,10 @@
 			fbStudents.push({
 				name: "imaNewbee"
 			});
+		};
+
+		vm.removeStudent = function (item) {
+			fbStudents.child(item.firebase.name()).remove();
 		};	
 	}
 
