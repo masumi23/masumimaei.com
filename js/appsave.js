@@ -44,7 +44,13 @@
 		vm.selectStudent = function() {
 			vm.currentStudent(this);
 			console.log("you clicked on a student", this.name(), "current student is ", vm.currentStudent().name());
-		};			
+		};	
+
+		vm.addStudent = function() {
+			fbStudents.push({
+				name: "imaNewbee"
+			});
+		};	
 	}
 
 	init();

@@ -17,6 +17,10 @@
 		</ul>
 	</div>
 
+	<div>
+		<a data-bind="click: $root.addStudent">ADD A STUDENT</a>
+	</div>
+
 	<div data-bind="with: currentStudent()">
 		<div data-bind="text: name"></div>
 		<label for="student-name">Name:</label>
