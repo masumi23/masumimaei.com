@@ -10,48 +10,88 @@
 	<link href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
 </head>
 <body>
-	
-	<div>
-		<ul data-bind="foreach: students">
-			<li><a data-bind="text: name, click: $root.selectStudent"></a></li>
-			<ul>
-				<li data-bind="text: link"></li>
-				<li>Repertoire:</li>
+	<div class="navbar navbar-default">
+	    <div class="navbar-header">
+	        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" href="javascript:void(0)">Masumi Maei</a>
+	    </div>
+	    <div class="navbar-collapse collapse navbar-responsive-collapse">
+	        <ul class="nav navbar-nav">
+	            <li class="active"><a data-bind="text:currentPage" href="javascript:void(0)"></a></li>
+	            <li><a data-bind="text:currentMode"href="javascript:void(0)">Mode</a></li>
+	        </ul>
+	    </div>
+	</div>
+
+	<div class="container" data-bind="visible: currentPage='info'">
+		
+	</div>
+
+	<div class="container" data-bind="visible: currentPage='studentPage'">
+		<div class="col-sm-4">
+			<h2>Students</h2>
+			<ul data-bind="foreach: students">
+				<li>
+					<a data-bind="text: name, click: $root.selectStudent"></a>
+					<a class="btn" data-bind="click: $root.removeStudent">X</a>
+				</li>
+				<ul>
+					<li data-bind="text: link"></li>
+					<li>Repertoire:</li>
 					<ul data-bind="foreach: repertoire">
 						<li data-bind="text: name"></li>
 					</ul>
-				<li><a data-bind="click: $root.removeStudent">X</a></li>
+				</ul>
 			</ul>
-		</ul>
-	</div>
-
-	<div>
-		<a data-bind="click: $root.addStudent">ADD A STUDENT</a>
-	</div>
-
-	<div data-bind="with: currentStudent()">
-		
-		<div>
-			<label for="student-name">Name:</label>
-			<input id="student-name" type="text" data-bind="value: name">
+			<div>
+				<a class="btn" data-bind="click: $root.addStudent">ADD A STUDENT</a>
+			</div>
 		</div>
 		
-		<div>
-			<label for="student-link">link:</label>
-			<input id="student-link" type="text" data-bind="value: link">
-		</div>
 
-		<div> Repertoire:
-			<ul data-bind="foreach: repertoire">
-				<li>
-					<label for="song">Song:</label>
-					<input id="song" type="text" data-bind="value: name"></input>
-					<a data-bind="click: $root.removeSong">X</a>
-				</li>
-			</ul>
-			<div><a data-bind="click: $root.addSong">Add a song</a></div>
+		<div class="col-sm-8" data-bind="visible: currentMode='admin'">
+			<h3>Edit</h3>
+			<div data-bind="with: currentStudent()">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="student-name">Name:</label>
+						<div class="col-sm-10">
+							<input class="form-control" id="student-name" type="text" data-bind="value: name">
+						</div>
+					</div>
+				</form>
+				
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="student-link">link:</label>
+						<div class="col-sm-10">
+							<input class="form-control" id="student-link" type="text" data-bind="value: link">
+						</div>
+					</div>
+				</form>
+			
+				<form action="" class="form-horizontal">
+					<div class="form-group"> 
+					<h4>Repertoire:</h4>
+						<ul data-bind="foreach: repertoire">
+							<li>
+								<label class="col-sm-2 control-label" for="song">Song:</label>
+								<div class="col-sm-10">
+									<input class="form-control" id="song" type="text" data-bind="value: name"></input>
+									<a class="btn" data-bind="click: $root.removeSong">X</a>
+								</div>
+							</li>
+						</ul>
+						<div><a class="btn" data-bind="click: $root.addSong">Add a song</a></div>
+					</div>
+				</form>
+			
+			</div>
 		</div>
-
 	</div>
 
 

@@ -41,7 +41,7 @@
 			repertoire: ko.observable([1,2])
 		}) ,
 		vm.currentPage = ko.observable('studentPage'),
-		vm.currentMode = ko.observable('student'),
+		vm.currentMode = ko.observable('admin'),
 
 		//functions to change UI state
 		vm.setPage = function(clickedPage) {
