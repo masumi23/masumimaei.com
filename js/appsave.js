@@ -34,15 +34,17 @@
 		vm.pages = ["about", "resource", "studentPage"];
 		vm.modes = ["admin", "student"];
 		vm.currentStudent = ko.observable({
-			name: ko.observable("foo"),
-			link: ko.observable("www.google.com"),
+			name: ko.observable(""),
+			link: ko.observable(""),
 			repertoire: ko.observableArray([1,2])
 		});
-		vm.currentPage = ko.observable('studentPage');
+		vm.currentPage = ko.observable("about");
 		vm.currentMode = ko.observable('admin');
 
 		//functions to change UI state
 		vm.setPage = function() {
+			console.log("hi");
+			console.log(vm.currentPage);
 			console.log(vm);
 			vm.currentPage(this);
 			console.log("clicked a page, now on " + vm.currentPage());
