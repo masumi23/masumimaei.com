@@ -10,9 +10,7 @@
 	//do I need init?
 	function init () {
 		console.log('init');
-		
 		ko.applyBindings( viewModel );
-
 	}
 	
 	function ViewModel() {
@@ -33,20 +31,21 @@
 		);
 		
 		//UI state
-		vm.pages = ["about", "resource", "studentPage"],
-		vm.modes = ["admin", "student"],
+		vm.pages = ["about", "resource", "studentPage"];
+		vm.modes = ["admin", "student"];
 		vm.currentStudent = ko.observable({
 			name: ko.observable("foo"),
 			link: ko.observable("www.google.com"),
-			repertoire: ko.observable([1,2])
-		}) ,
-		vm.currentPage = ko.observable('studentPage'),
-		vm.currentMode = ko.observable('admin'),
+			repertoire: ko.observableArray([1,2])
+		});
+		vm.currentPage = ko.observable('studentPage');
+		vm.currentMode = ko.observable('admin');
 
 		//functions to change UI state
-		vm.setPage = function(clickedPage) {
-			vm.currentPage(clickedPage);
-			console.log("clicked a page, now on " + viewModel.currentPage());
+		vm.setPage = function() {
+			console.log(vm);
+			vm.currentPage(this);
+			console.log("clicked a page, now on " + vm.currentPage());
 		};
 
 		vm.selectStudent = function() {
@@ -56,9 +55,9 @@
 
 		vm.addStudent = function() {
 			fbStudents.push({
-				name: "imaNewbee",
+				name: "New Student",
 				link: "www.google.com",
-				repertoire: ['a', 'b']
+				repertoire: [ {name:'a'}, {name:'b'}]
 			});
 			//how do I console.log this to see the list of rep?
 		};
