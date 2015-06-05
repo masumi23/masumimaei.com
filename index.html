@@ -31,11 +31,15 @@
 	    </div>
 	</div>
 
-	<div class="container" data-bind="visible: currentPage='info'">
-		
+	<div data-bind="visible: currentPage() === 'about'" class="container">
+		<div>info</div>
 	</div>
 
-	<div class="container" data-bind="visible: currentPage='studentPage'">
+	<div data-bind="visible: currentPage() === 'resource'" class="container">
+		<div>resources</div>
+	</div>
+
+	<div data-bind="visible: currentPage() === 'studentPage'" class="container">
 		<div class="col-sm-4">
 			<h2>Students</h2>
 			<ul data-bind="foreach: students">
