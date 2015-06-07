@@ -21,11 +21,12 @@
 	    	    <a class="navbar-brand" href="javascript:void(0)">Masumi Maei</a>
 	    	</div>
 	    	<div class="navbar-collapse collapse navbar-responsive-collapse">
-	    	    <ul class="nav navbar-nav" data-bind="foreach: pages">
-    	        	<li><a href="javascript:void(0)" data-bind="text: name, click: $root.setPage">Active</a></li>
+	    	    <ul class="nav navbar-nav">
+    	        	<!-- ko foreach: pages -->
+    	        	<li data-bind="css: {active: $parent.currentPage() === name}"><a href="javascript:void(0)" data-bind="text: name, click: $root.setPage">Active</a></li>
+    	        	<!-- /ko -->
+	    	        <li><a data-bind="text:currentMode"href="javascript:void(0)">Mode</a></li>
     	        </ul>
-    	        <li class="active"><a data-bind="text:currentPage" href="javascript:void(0)"></a></li>
-    	        <li><a data-bind="text:currentMode"href="javascript:void(0)">Mode</a></li>
 	    	    
 	    	</div>
 	    </div>
