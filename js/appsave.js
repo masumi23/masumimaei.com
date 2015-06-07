@@ -1,20 +1,39 @@
 (function() {
 
-  var myFirebaseRef = new Firebase('https://masumi.firebaseio.com/site');
-  var fbStudents = myFirebaseRef.child('students');
-  var fbMe = myFirebaseRef.child('me');
-  var fbResource = myFirebaseRef.child('resouce');
-  var fbTest = myFirebaseRef.child('test');
-  var viewModel = new ViewModel();
+  var myFirebaseRef;
+  var fbStudents;
+  var fbMe;
+  var fbResource;
+  var fbTest;
+  var viewModel;
 
   //do I need init?
   function init() {
-    console.log('init');
-    ko.applyBindings(viewModel);
+    console.log('initing');
+
+    myFirebaseRef = new Firebase('https://masumi.firebaseio.com/site');
+    myFirebaseRef.authWithOAuthPopup('google', function(error, authData) {
+      if (error) {
+        console.log('Login Fail:', error);
+      } else {
+        console.log(authData);
+        fbStudents = myFirebaseRef.child('students');
+        fbMe = myFirebaseRef.child('me');
+        fbResource = myFirebaseRef.child('resouce');
+        fbTest = myFirebaseRef.child('test');
+
+        viewModel = new ViewModel();
+        viewModel.userName(authData.google.displayName);
+
+        ko.applyBindings(viewModel);
+      }
+    });
+
   }
 
   function ViewModel() {
     var vm = this;
+    vm.userName = ko.observable('');
     vm.students = KnockoutFire.observable(
       fbStudents, {
         //$ means that vm.students is now an observable array
@@ -33,7 +52,8 @@
     vm.me = KnockoutFire.observable(
       fbMe, {
         'bio': true,
-        'bioImg': true
+        'bioImg': true,
+        'name': true
       }
     );
 

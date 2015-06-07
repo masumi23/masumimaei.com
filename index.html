@@ -34,7 +34,7 @@
 	</div>
 
 	<div data-bind="visible: currentPage() === 'about', with: me()" class="container">
-		<h2>About Masumi Maei</h2>
+		<h2 data-bind="text: 'About ' + name()"></h2>
 		<img class="col-xs-12 col-sm-5 pull-right" data-bind="attr: {src: bioImg}" alt="">
 		<div class="col-xs-12 col-sm-7" data-bind="html: bio"></div>
 		<div data-bind="visible: $root.currentMode() === 'admin'">
@@ -50,6 +50,7 @@
 	</div>
 
 	<div data-bind="visible: currentPage() === 'studentPage' && currentMode() === 'admin'" class="container">
+		<h2 data-bind="text: 'Welcome ' + $root.userName()"></h2>
 		<div class="col-sm-4">
 			<h2>Students</h2>
 			<ul data-bind="foreach: students">
