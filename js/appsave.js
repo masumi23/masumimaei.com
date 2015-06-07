@@ -74,6 +74,7 @@
     };
 
     vm.removeStudent = function(item) {
+      if (!confirm('are you sure?')) return false;
       fbStudents.child(item.firebase.key()).remove();
       console.log(item);
     };

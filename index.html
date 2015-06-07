@@ -8,6 +8,7 @@
 	<link href="bower_components/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
 	<link href="bower_components/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
 	<link href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div class="navbar navbar-default">
@@ -44,9 +45,9 @@
 		<div class="col-sm-4">
 			<h2>Students</h2>
 			<ul data-bind="foreach: students">
-				<li>
-					<a data-bind="text: name, click: $root.selectStudent"></a>
-					<a class="btn" data-bind="click: $root.removeStudent">X</a>
+				<li class="student">
+					<a class="btn btn-sm btn-flat btn-primary" data-bind="text: name, click: $root.selectStudent, css: {active: $parent.currentStudent() === $data}"></a>
+					<a class="btn btn-sm btn-flat btn-warning btn-student-remove" data-bind="click: $root.removeStudent">X</a>
 				</li>
 				<ul>
 					<li data-bind="text: link"></li>

@@ -1,0 +1,7 @@
+.btn-student-remove {
+	display: none;
+}
+
+.student:hover .btn-student-remove {
+	display: inline-block;
+}
