@@ -33,15 +33,23 @@
 	    </div>
 	</div>
 
-	<div data-bind="visible: currentPage() === 'about'" class="container">
-		<div>info</div>
+	<div data-bind="visible: currentPage() === 'about', with: me()" class="container">
+		<h2>About Masumi Maei</h2>
+		<img class="col-xs-12 col-sm-5 pull-right" data-bind="attr: {src: bioImg}" alt="">
+		<div class="col-xs-12 col-sm-7" data-bind="html: bio"></div>
+		<div data-bind="visible: $root.currentMode() === 'admin'">
+			
+		</div>
 	</div>
 
 	<div data-bind="visible: currentPage() === 'resource'" class="container">
-		<div>resources</div>
+		<h2>resources</h2>
+		<div data-bind="visible: $root.currentMode() === 'admin'">
+			
+		</div>
 	</div>
 
-	<div data-bind="visible: currentPage() === 'studentPage'" class="container">
+	<div data-bind="visible: currentPage() === 'studentPage' && currentMode() === 'admin'" class="container">
 		<div class="col-sm-4">
 			<h2>Students</h2>
 			<ul data-bind="foreach: students">

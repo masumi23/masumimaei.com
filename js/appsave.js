@@ -30,6 +30,13 @@
       }
     );
 
+    vm.me = KnockoutFire.observable(
+      fbMe, {
+        'bio': true,
+        'bioImg': true
+      }
+    );
+
     //UI state
     vm.pages = [
     {
