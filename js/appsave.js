@@ -4,7 +4,6 @@
   var fbStudents;
   var fbMe;
   var fbResource;
-  var fbTest;
   var viewModel;
 
   //do I need init?
@@ -25,13 +24,13 @@
 
         // only do the following if it's the first time, and we can write
         // HOW???
-        studentName = prompt('What is the student\'s name?');
+        // studentName = prompt('What is the student\'s name?');
         fbUser.set({
           'dateJoined': Date.now(),
           'readable': {
             'students': {
               '001': {
-                'name': studentName,
+                'name': 'studentName',
               }
             }
           },
@@ -48,8 +47,7 @@
 
         fbStudents = myFirebaseRef.child('students');
         fbMe = myFirebaseRef.child('me');
-        fbResource = myFirebaseRef.child('resouce');
-        fbTest = myFirebaseRef.child('test');
+        fbResource = myFirebaseRef.child('resources');
 
         viewModel = new ViewModel();
         viewModel.userName(authData.google.displayName);
@@ -113,6 +111,15 @@
       }
     );
 
+    vm.resources = KnockoutFire.observable(
+      fbResource, {
+        '$resource': {
+          'url': true,
+          'comment': true
+        }
+      }
+    );
+
     //UI state
     vm.pages = [
     {
@@ -137,7 +144,7 @@
       link: ko.observable(''),
       repertoire: ko.observableArray([1, 2])
     });
-    vm.currentPage = ko.observable('userPage');
+    vm.currentPage = ko.observable('resource');
     //functions to change UI state
     vm.generalUI = {
       setPage: function() {
