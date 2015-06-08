@@ -13,10 +13,34 @@
 
     myFirebaseRef = new Firebase('https://masumi.firebaseio.com/site');
     myFirebaseRef.authWithOAuthPopup('google', function(error, authData) {
+      var studentName;
+
       if (error) {
         console.log('Login Fail:', error);
       } else {
         console.log(authData);
+
+        fbUsers = myFirebaseRef.child('users');
+        fbUser = fbUsers.child(authData.uid);
+
+        // // only do the following if it's the first time, and we can write
+        // studentName = prompt('What is the student\'s name?');
+        // fbUser.set({
+        //   'dateJoined': Date.now(),
+        //   'readable': {
+        //     'studentName': studentName
+        //   },
+        //   'writeable': {
+        //     'contact': {
+        //       'name': '',
+        //       'address': '',
+        //       'email': 'foo',
+        //       'phone': '',
+        //       'phone2': ''
+        //     }
+        //   }
+        // });
+
         fbStudents = myFirebaseRef.child('students');
         fbMe = myFirebaseRef.child('me');
         fbResource = myFirebaseRef.child('resouce');
@@ -24,6 +48,10 @@
 
         viewModel = new ViewModel();
         viewModel.userName(authData.google.displayName);
+
+        if (authData.uid === 'google:117783533189040685811') {
+          viewModel.adminMode(true);
+        }
 
         ko.applyBindings(viewModel);
       }
@@ -33,7 +61,17 @@
 
   function ViewModel() {
     var vm = this;
+    vm.adminMode = ko.observable(false);
     vm.userName = ko.observable('');
+    vm.users = KnockoutFire.observable(
+      fbUsers, {
+        '$user': {
+          'readable': {
+            'name': true
+          }
+        }
+      }
+    );
     vm.students = KnockoutFire.observable(
       fbStudents, {
         //$ means that vm.students is now an observable array
@@ -68,17 +106,21 @@
       title: 'Resources'
     },
     {
+      name: 'userPage',
+      title: 'All Users'
+    },
+    {
       name: 'studentPage',
-      title: 'Your Student Page'
+      title: 'Student Page'
     }];
-    vm.modes = ['admin', 'student'];
+
     vm.currentStudent = ko.observable({
       name: ko.observable(''),
       link: ko.observable(''),
       repertoire: ko.observableArray([1, 2])
     });
-    vm.currentPage = ko.observable('studentPage');
-    vm.currentMode = ko.observable('admin');
+    vm.currentPage = ko.observable('userPage');
+
 
     //functions to change UI state
     vm.setPage = function() {

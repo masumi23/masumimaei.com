@@ -24,9 +24,9 @@
 	    	<div class="navbar-collapse collapse navbar-responsive-collapse">
 	    	    <ul class="nav navbar-nav">
     	        	<!-- ko foreach: pages -->
-    	        	<li data-bind="css: {active: $parent.currentPage() === name}"><a href="javascript:void(0)" data-bind="text: name, click: $root.setPage">Active</a></li>
+    	        	<li data-bind="css: {active: $parent.currentPage() === name}"><a href="javascript:void(0)" data-bind="text: title, click: $root.setPage">Active</a></li>
     	        	<!-- /ko -->
-	    	        <li><a data-bind="text:currentMode"href="javascript:void(0)">Mode</a></li>
+	    	        <li><a data-bind="visible: $root.adminMode()"href="javascript:void(0)">!Admin Mode!</a></li>
     	        </ul>
 	    	    
 	    	</div>
@@ -37,19 +37,33 @@
 		<h2 data-bind="text: 'About ' + name()"></h2>
 		<img class="col-xs-12 col-sm-5 pull-right" data-bind="attr: {src: bioImg}" alt="">
 		<div class="col-xs-12 col-sm-7" data-bind="html: bio"></div>
-		<div data-bind="visible: $root.currentMode() === 'admin'">
+		<div data-bind="visible: $root.adminMode()">
 			
 		</div>
 	</div>
 
 	<div data-bind="visible: currentPage() === 'resource'" class="container">
 		<h2>resources</h2>
-		<div data-bind="visible: $root.currentMode() === 'admin'">
+		<div data-bind="visible: $root.adminMode()">
 			
 		</div>
 	</div>
 
-	<div data-bind="visible: currentPage() === 'studentPage' && currentMode() === 'admin'" class="container">
+	<div data-bind="visible: currentPage() === 'userPage' && adminMode()" class="container">
+		<h2 data-bind="text: currentPage().title"></h2>
+		<div data-bind="col-sm-4">
+			<ul data-bind="foreach: users">
+				<li>
+					<a data-bind="text: readable().name()"></a>
+				</li>
+			</ul>
+		</div>
+		<div data-bind="col-sm-8">
+			
+		</div>
+	</div>
+
+	<div data-bind="visible: currentPage() === 'studentPage' && adminMode()" class="container">
 		<h2 data-bind="text: 'Welcome ' + $root.userName()"></h2>
 		<div class="col-sm-4">
 			<h2>Students</h2>
