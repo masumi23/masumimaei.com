@@ -67,7 +67,21 @@
       fbUsers, {
         '$user': {
           'readable': {
-            'name': true
+            'name': true,
+            'students': {
+              '$student': {
+                'name': true
+              }
+            }
+          },
+          'writeable': {
+            'contact': {
+              'name': true,
+              'address': true,
+              'email': true,
+              'phone': true,
+              'phone2': true
+            }
           }
         }
       }
@@ -143,7 +157,9 @@
     };
 
     vm.removeStudent = function(item) {
-      if (!confirm('are you sure?')) return false;
+      if (!confirm('are you sure?')) {
+        return false;
+      }
       fbStudents.child(item.firebase.key()).remove();
       console.log(item);
     };
@@ -158,6 +174,20 @@
           .child('repertoire').child(item.firebase.key()).remove();
       console.log('removed song');
       console.log(item);
+    };
+
+    vm.addingStudentTo = ko.observable(null);
+    vm.studentToAddToUser = ko.observable(null);
+
+    vm.addStudentToUser = function() {
+      if (!vm.addingStudentTo()) {
+        vm.addingStudentTo(this);
+      } else {
+        console.log(vm.addingStudentTo());
+        console.log(vm.studentToAddToUser());
+        vm.addingStudentTo().readable().students.push(vm.studentToAddToUser());
+        vm.addingStudentTo(null);
+      }
     };
   }
 

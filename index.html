@@ -54,8 +54,27 @@
 		<div data-bind="col-sm-4">
 			<ul data-bind="foreach: users">
 				<li>
-					<a data-bind="text: readable().name()"></a>
+					<a data-bind="text: readable().name"></a>
 				</li>
+				<ul>
+					<div data-bind="with: writeable().contact()">
+						<li data-bind="text: address"></li>
+						<li data-bind="text: email"></li>
+						<li data-bind="text: phone"></li>
+					</div>
+					<div>Students:</div>
+					<ul data-bind="foreach: readable().students()">
+						<li data-bind="text: name"></li>
+					</ul>
+					<form data-bind="visible: $root.addingStudentTo()">
+						<div class="form-group">
+							<select name="" class="form-control" data-bind="foreach: $root.students, value: $root.studentToAddToUser">
+								<option data-bind="text: name"></option>
+							</select>
+						</div>
+					</form>
+					<a class="btn" data-bind="click: $root.addStudentToUser">Add student</a>
+				</ul>
 			</ul>
 		</div>
 		<div data-bind="col-sm-8">
