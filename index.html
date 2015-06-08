@@ -66,10 +66,13 @@
 					<ul data-bind="foreach: readable().students()">
 						<li data-bind="text: name"></li>
 					</ul>
-					<form data-bind="visible: $root.editUser.addingStudentTo()">
+					<form data-bind="visible: $root.editUser.selectedUser()">
 						<div class="form-group">
-							<select name="" class="form-control" data-bind="foreach: $root.students, value: $root.editUser.studentToAddToUser">
+							<select name="" class="form-control", data-bind="value: $root.editUser.studentToAddToUser">
+								<option>none</option>
+								<!-- ko foreach: $root.editUser.newStudentList() -->
 								<option data-bind="text: name"></option>
+								<!-- /ko -->
 							</select>
 						</div>
 					</form>

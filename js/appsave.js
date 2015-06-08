@@ -24,6 +24,7 @@
         fbUser = fbUsers.child(authData.uid);
 
         // only do the following if it's the first time, and we can write
+        // HOW???
         studentName = prompt('What is the student\'s name?');
         fbUser.set({
           'dateJoined': Date.now(),
@@ -178,17 +179,20 @@
     };
 
     vm.editUser = {
-      addingStudentTo: ko.observable(null),
+      selectedUser: ko.observable(null),
       studentToAddToUser: ko.observable(null),
+      newStudentList: ko.computed(function() {
+        return vm.students();
+      }),
       addStudentToUser: function() {
-        if (!vm.editUser.addingStudentTo()) {
-          vm.editUser.addingStudentTo(this);
+        if (!vm.editUser.selectedUser()) {
+          vm.editUser.selectedUser(this);
         } else {
-          console.log(vm.editUser.addingStudentTo());
+          console.log(vm.editUser.selectedUser());
           console.log(vm.editUser.studentToAddToUser());
-          vm.editUser.addingStudentTo().readable().students
+          vm.editUser.selectedUser().readable().students
           .push(vm.editUser.studentToAddToUser());
-          vm.editUser.addingStudentTo(null);
+          vm.editUser.selectedUser(null);
         }
       }
     };
