@@ -149,6 +149,16 @@
     vm.generalUI = {
       setPage: function() {
         vm.currentPage(this.name);
+      },
+      addResource: function() {
+        fbResource.push({
+          url: 'www.google.com',
+          comment: 'I comment'
+        });
+      },
+      removeResource: function(item) {
+        fbResource.child(item.firebase.key()).remove();
+        console.log(item);
       }
     };
 

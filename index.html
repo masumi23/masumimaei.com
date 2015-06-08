@@ -58,16 +58,19 @@
 				<legend>Edit Resources</legend>
 					<div class="form-group">
 						<div data-bind="foreach: resources">
-							<label class="col-sm-2 control-label">link:</label>
-							<div class="col-sm-10">
-								<input class="form-control" type="text" data-bind="value: url">
+							<div class="resource row">
+								<label class="col-sm-2 control-label">link:</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" data-bind="value: url">
+								</div>
+								<label class="col-sm-2 control-label">comment:</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" data-bind="value: comment">
+								</div>
+								<a class="btn btn-flat btn-warning btn-remove" data-bind="click: $root.generalUI.removeResource">X</a>
 							</div>
-							<label class="col-sm-2 control-label">comment:</label>
-							<div class="col-sm-10">
-								<input class="form-control" type="text" data-bind="value: comment">
-							</div>
-							<div>        </div>
 						</div>
+						<div><a class="btn btn-flat btn-primary btn-sm" data-bind="click: $root.generalUI.addResource">Add a resource</a></div>
 					</div>
 				</fieldset>
 			</form>

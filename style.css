@@ -8,6 +8,10 @@
 	display: inline-block;
 }
 
+.student-song {
+	position: relative;
+}
+
 .student-song .btn-remove {
 	position: absolute;
 	top: 2px;
@@ -16,10 +20,22 @@
 	padding: 2px 10px;
 }
 
-.student-song {
+.student-song:hover .btn-remove {
+	display: inline-block;
+}
+
+.resource {
 	position: relative;
 }
 
-.student-song:hover .btn-remove {
+.resource .btn-remove {
+	position: absolute;
+	top: 2px;
+	right: 15px;
+	margin: 0;
+	padding: 2px 10px;
+}
+
+.resource:hover .btn-remove {
 	display: inline-block;
 }
