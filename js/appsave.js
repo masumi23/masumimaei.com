@@ -134,61 +134,62 @@
       repertoire: ko.observableArray([1, 2])
     });
     vm.currentPage = ko.observable('userPage');
-
-
     //functions to change UI state
-    vm.setPage = function() {
-      vm.currentPage(this.name);
-    };
-
-    vm.selectStudent = function() {
-      vm.currentStudent(this);
-      console.log('you clicked on a student', this.name(),
-          'current student is ', vm.currentStudent().name());
-    };
-
-    vm.addStudent = function() {
-      fbStudents.push({
-        name: 'New Student',
-        link: 'www.google.com',
-        repertoire: [{name: 'a'}, {name: 'b'}]
-      });
-      //how do I console.log this to see the list of rep?
-    };
-
-    vm.removeStudent = function(item) {
-      if (!confirm('are you sure?')) {
-        return false;
-      }
-      fbStudents.child(item.firebase.key()).remove();
-      console.log(item);
-    };
-
-    vm.addSong = function(item) {
-      vm.currentStudent().firebase
-      .child('repertoire').push({name: 'song'});
-    };
-
-    vm.removeSong = function(item) {
-      vm.currentStudent().firebase
-          .child('repertoire').child(item.firebase.key()).remove();
-      console.log('removed song');
-      console.log(item);
-    };
-
-    vm.addingStudentTo = ko.observable(null);
-    vm.studentToAddToUser = ko.observable(null);
-
-    vm.addStudentToUser = function() {
-      if (!vm.addingStudentTo()) {
-        vm.addingStudentTo(this);
-      } else {
-        console.log(vm.addingStudentTo());
-        console.log(vm.studentToAddToUser());
-        vm.addingStudentTo().readable().students.push(vm.studentToAddToUser());
-        vm.addingStudentTo(null);
+    vm.generalUI = {
+      setPage: function() {
+        vm.currentPage(this.name);
       }
     };
+
+    vm.editStudent = {
+      selectStudent: function() {
+        vm.currentStudent(this);
+        console.log('you clicked on a student', this.name(),
+            'current student is ', vm.currentStudent().name());
+      },
+      addStudent: function() {
+        fbStudents.push({
+          name: 'New Student',
+          link: 'www.google.com',
+          repertoire: [{name: 'a'}, {name: 'b'}]
+        });
+        //how do I console.log this to see the list of rep?
+      },
+      removeStudent: function(item) {
+        if (!confirm('are you sure?')) {
+          return false;
+        }
+        fbStudents.child(item.firebase.key()).remove();
+        console.log(item);
+      },
+      addSong: function(item) {
+        vm.currentStudent().firebase
+        .child('repertoire').push({name: 'song'});
+      },
+      removeSong: function(item) {
+        vm.currentStudent().firebase
+            .child('repertoire').child(item.firebase.key()).remove();
+        console.log('removed song');
+        console.log(item);
+      }
+    };
+
+    vm.editUser = {
+      addingStudentTo: ko.observable(null),
+      studentToAddToUser: ko.observable(null),
+      addStudentToUser: function() {
+        if (!vm.editUser.addingStudentTo()) {
+          vm.editUser.addingStudentTo(this);
+        } else {
+          console.log(vm.editUser.addingStudentTo());
+          console.log(vm.editUser.studentToAddToUser());
+          vm.editUser.addingStudentTo().readable().students
+          .push(vm.editUser.studentToAddToUser());
+          vm.editUser.addingStudentTo(null);
+        }
+      }
+    };
+
   }
 
   init();

@@ -66,14 +66,14 @@
 					<ul data-bind="foreach: readable().students()">
 						<li data-bind="text: name"></li>
 					</ul>
-					<form data-bind="visible: $root.addingStudentTo()">
+					<form data-bind="visible: $root.editUser.addingStudentTo()">
 						<div class="form-group">
-							<select name="" class="form-control" data-bind="foreach: $root.students, value: $root.studentToAddToUser">
+							<select name="" class="form-control" data-bind="foreach: $root.students, value: $root.editUser.studentToAddToUser">
 								<option data-bind="text: name"></option>
 							</select>
 						</div>
 					</form>
-					<a class="btn" data-bind="click: $root.addStudentToUser">Add student</a>
+					<a class="btn" data-bind="click: $root.editUser.addStudentToUser">Add student</a>
 				</ul>
 			</ul>
 		</div>
@@ -88,8 +88,8 @@
 			<h2>Students</h2>
 			<ul data-bind="foreach: students">
 				<li class="student">
-					<a class="btn btn-sm btn-flat btn-primary" data-bind="text: name, click: $root.selectStudent, css: {active: $parent.currentStudent() === $data}"></a>
-					<a class="btn btn-sm btn-flat btn-warning btn-remove" data-bind="click: $root.removeStudent">X</a>
+					<a class="btn btn-sm btn-flat btn-primary" data-bind="text: name, click: $root.editStudent.selectStudent, css: {active: $root.currentStudent() === $data}"></a>
+					<a class="btn btn-sm btn-flat btn-warning btn-remove" data-bind="click: $root.editStudent.removeStudent">X</a>
 				</li>
 				<ul>
 					<li data-bind="text: link"></li>
@@ -100,7 +100,7 @@
 				</ul>
 			</ul>
 			<div>
-				<a class="btn" data-bind="click: $root.addStudent">ADD A STUDENT</a>
+				<a class="btn" data-bind="click: $root.editStudent.addStudent">ADD A STUDENT</a>
 			</div>
 		</div>
 		
@@ -134,11 +134,11 @@
 									<label class="col-sm-2 control-label" for="song">Song:</label>
 									<div class="col-sm-10">
 										<input class="form-control" id="song" type="text" data-bind="value: name"></input>
-										<a class="btn btn-flat btn-warning btn-remove" data-bind="click: $root.removeSong">X</a>
+										<a class="btn btn-flat btn-warning btn-remove" data-bind="click: $root.editStudent.removeSong">X</a>
 									</div>
 								</div>
 							</div>
-							<div><a class="btn btn-flat btn-primary btn-sm" data-bind="click: $root.addSong">Add a song</a></div>
+							<div><a class="btn btn-flat btn-primary btn-sm" data-bind="click: $root.editStudent.addSong">Add a song</a></div>
 						</div>
 					</fieldset>
 				</form>
