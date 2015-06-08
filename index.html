@@ -54,7 +54,7 @@
 		<div data-bind="col-sm-4">
 			<ul data-bind="foreach: users">
 				<li>
-					<a data-bind="text: readable().name"></a>
+					<a data-bind="text: writeable().contact().name"></a>
 				</li>
 				<ul>
 					<div data-bind="with: writeable().contact()">

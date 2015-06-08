@@ -23,23 +23,27 @@
         fbUsers = myFirebaseRef.child('users');
         fbUser = fbUsers.child(authData.uid);
 
-        // // only do the following if it's the first time, and we can write
-        // studentName = prompt('What is the student\'s name?');
-        // fbUser.set({
-        //   'dateJoined': Date.now(),
-        //   'readable': {
-        //     'studentName': studentName
-        //   },
-        //   'writeable': {
-        //     'contact': {
-        //       'name': '',
-        //       'address': '',
-        //       'email': 'foo',
-        //       'phone': '',
-        //       'phone2': ''
-        //     }
-        //   }
-        // });
+        // only do the following if it's the first time, and we can write
+        studentName = prompt('What is the student\'s name?');
+        fbUser.set({
+          'dateJoined': Date.now(),
+          'readable': {
+            'students': {
+              '001': {
+                'name': studentName,
+              }
+            }
+          },
+          'writeable': {
+            'contact': {
+              'name': 'BJÖRK Garcia',
+              'address': 'house',
+              'email': 'foo',
+              'phone': '4155555555',
+              'phone2': ''
+            }
+          }
+        });
 
         fbStudents = myFirebaseRef.child('students');
         fbMe = myFirebaseRef.child('me');
@@ -67,7 +71,6 @@
       fbUsers, {
         '$user': {
           'readable': {
-            'name': true,
             'students': {
               '$student': {
                 'name': true
