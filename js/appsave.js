@@ -179,20 +179,35 @@
     };
 
     vm.editUser = {
-      selectedUser: ko.observable(null),
+      currentUser: ko.observable(null),
       studentToAddToUser: ko.observable(null),
+      //not working yet. Must be a better way
+      matchStudents: function() {
+        for (var j = 0; j < vm.editUser.currentUser.students.length; j++) {
+          for (var i = 0; i < vm.students.length; i++) {
+            if (vm.students[i].name === vm.editUser.currentUser.
+              students[j].name) {
+              console.log('matched up!');
+              vm.editUser.currentUser.
+              students[j] = ko.observable(vm.students[i]);
+            }
+          }
+        }
+      },
       newStudentList: ko.computed(function() {
-        return vm.students();
+        return vm.students;
       }),
       addStudentToUser: function() {
-        if (!vm.editUser.selectedUser()) {
-          vm.editUser.selectedUser(this);
+        if (!vm.editUser.currentUser()) {
+          vm.editUser.currentUser(this);
+          console.log(this);
         } else {
-          console.log(vm.editUser.selectedUser());
+          console.log(vm.editUser.currentUser());
           console.log(vm.editUser.studentToAddToUser());
-          vm.editUser.selectedUser().readable().students
-          .push(vm.editUser.studentToAddToUser());
-          vm.editUser.selectedUser(null);
+          //not working yet -- not going into firebase
+          vm.editUser.currentUser().firebase.child('readable').
+          child('students').push({name: vm.editUser.studentToAddToUser()});
+          vm.editUser.currentUser(null);
         }
       }
     };

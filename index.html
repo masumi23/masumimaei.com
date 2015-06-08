@@ -66,7 +66,7 @@
 					<ul data-bind="foreach: readable().students()">
 						<li data-bind="text: name"></li>
 					</ul>
-					<form data-bind="visible: $root.editUser.selectedUser()">
+					<form data-bind="visible: $root.editUser.currentUser()">
 						<div class="form-group">
 							<select name="" class="form-control", data-bind="value: $root.editUser.studentToAddToUser">
 								<option>none</option>
