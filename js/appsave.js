@@ -204,7 +204,6 @@
         } else {
           console.log(vm.editUser.currentUser());
           console.log(vm.editUser.studentToAddToUser());
-          //not working yet -- not going into firebase
           vm.editUser.currentUser().firebase.child('readable').
           child('students').push({name: vm.editUser.studentToAddToUser()});
           vm.editUser.currentUser(null);

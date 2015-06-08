@@ -24,7 +24,7 @@
 	    	<div class="navbar-collapse collapse navbar-responsive-collapse">
 	    	    <ul class="nav navbar-nav">
     	        	<!-- ko foreach: pages -->
-    	        	<li data-bind="css: {active: $parent.currentPage() === name}"><a href="javascript:void(0)" data-bind="text: title, click: $root.setPage">Active</a></li>
+    	        	<li data-bind="css: {active: $root.currentPage() === name}"><a href="javascript:void(0)" data-bind="text: title, click: $root.generalUI.setPage">Active</a></li>
     	        	<!-- /ko -->
 	    	        <li><a data-bind="visible: $root.adminMode()"href="javascript:void(0)">!Admin Mode!</a></li>
     	        </ul>
