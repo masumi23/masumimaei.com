@@ -197,17 +197,20 @@
 
     vm.editUser = {
       currentUser: ko.observable(null),
-      studentToAddToUser: ko.observable(null),
+      studentToAddToUser: ko.observable(''),
       addStudentToUser: function() {
+        console.log(vm.editUser.newStudentList().length);
         if (!vm.editUser.currentUser()) {
           vm.editUser.currentUser(this);
           console.log(this);
+        } else if (vm.editUser.studentToAddToUser() === '') {
+          return false;
         } else {
-          console.log(vm.editUser.currentUser());
+          // console.log(vm.editUser.currentUser());
           console.log(vm.editUser.studentToAddToUser());
           vm.editUser.currentUser().firebase.child('readable').
-          child('students').push({name: vm.editUser.studentToAddToUser()});
-          vm.editUser.currentUser(null);
+            child('students').push({name: vm.editUser.studentToAddToUser()});
+          vm.editUser.studentToAddToUser(null);
         }
       }
 
@@ -217,20 +220,21 @@
       // handle when currentUser is null, before data loads
       if (!vm.editUser.currentUser()) {
         return vm.students();
-      }
-      
-      var currentStudents = vm.editUser.currentUser().readable().students();
-      var notCurrentStudentFilter = function(el) {
-        for (var i = 0; i < currentStudents.length; i++) {
-          var name = currentStudents[i]().name();
-          if (name === el().name()) {
-            return false;
+      } else {
+        var currentStudents = vm.editUser.currentUser().readable().students();
+        var notCurrentStudentFilter = function(el) {
+          for (var i = 0; i < currentStudents.length; i++) {
+            var name = currentStudents[i]().name();
+            if (name === el().name()) {
+              return false;
+            }
           }
-        }
-        return true;
-      };
+          return true;
+        };
 
-      return vm.students().filter(notCurrentStudentFilter);
+        return vm.students().filter(notCurrentStudentFilter);
+      }
+
     });
   }
 
