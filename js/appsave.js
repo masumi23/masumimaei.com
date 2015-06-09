@@ -198,22 +198,6 @@
     vm.editUser = {
       currentUser: ko.observable(null),
       studentToAddToUser: ko.observable(null),
-      //not working yet. Must be a better way
-      matchStudents: function() {
-        for (var j = 0; j < vm.editUser.currentUser.students.length; j++) {
-          for (var i = 0; i < vm.students.length; i++) {
-            if (vm.students[i].name === vm.editUser.currentUser.
-              students[j].name) {
-              console.log('matched up!');
-              vm.editUser.currentUser.
-              students[j] = ko.observable(vm.students[i]);
-            }
-          }
-        }
-      },
-      newStudentList: ko.computed(function() {
-        return vm.students;
-      }),
       addStudentToUser: function() {
         if (!vm.editUser.currentUser()) {
           vm.editUser.currentUser(this);
@@ -226,8 +210,28 @@
           vm.editUser.currentUser(null);
         }
       }
+
     };
 
+    vm.editUser.newStudentList = ko.computed(function() {
+      // handle when currentUser is null, before data loads
+      if (!vm.editUser.currentUser()) {
+        return vm.students();
+      }
+      
+      var currentStudents = vm.editUser.currentUser().readable().students();
+      var notCurrentStudentFilter = function(el) {
+        for (var i = 0; i < currentStudents.length; i++) {
+          var name = currentStudents[i]().name();
+          if (name === el().name()) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      return vm.students().filter(notCurrentStudentFilter);
+    });
   }
 
   init();
